@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import { useCellStyles } from "./styles";
+import { GameContext } from "../Context";
 
 type CellProps = {
-    onClick: () => void;
-    isSelected?: boolean
+    i: number,
+    j: number,
 }
 
-export const Cell: React.FC<CellProps> = ({ isSelected = false, onClick }) => {
-    const styles = useCellStyles({ isSelected });
+export const Cell: React.FC<CellProps> = ({ i, j }) => {
+    const { state, onCellClick } = useContext(GameContext);
+    const styles = useCellStyles({ isSelected: state[i][j].isSelected, color: state[i][j].pieceColor });
 
     return (
-        <div className={styles} onClick={onClick}></div>
+        <div className={styles} onClick={() => onCellClick(i, j)}></div>
     )
 }

@@ -10,7 +10,8 @@ export const useBoardStyles = () => ({
     }),
 })
 
-export const useCellStyles = ({ isSelected }: { isSelected: boolean }) => css({
+export const useCellStyles = ({ isSelected, color }: { isSelected: boolean, color: string | null }) => css({
     border: "2px solid #3a3a3c",
-    borderColor: isSelected ? "#6868ea" : "#3a3a3c"
+    borderColor: isSelected ? "#6868ea" : "#3a3a3c",
+    backgroundColor: color || "unset"
 })

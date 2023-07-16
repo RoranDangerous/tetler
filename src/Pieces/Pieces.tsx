@@ -10,7 +10,8 @@ export const Pieces = () => {
         <div className={css({
             display: "inline-grid",
             gap: "2px",
-            gridAutoFlow: "column"
+            gridAutoFlow: "column",
+            marginBottom: "0.5rem"
 
         })}>
             {pieces.map((piece) => (

@@ -1,13 +1,13 @@
 import { colors as availableColors } from "./colors";
 import { Piece } from "./types";
-import { rotate, shuffle } from "./utils";
+import { cut, shuffle } from "./arrayUtils";
 
 export class Game {
     size: number = 5; // board size NxN
     maxSize: number = 5; // max size of each piece
     minSize: number = 2; // min size of each piece
-    state: number[][];
-    pieces: Piece[];
+    state: number[][]; // winning state
+    pieces: Piece[]; // list of game pieces
     numPieces: number = 0;
 
     constructor() {
@@ -82,43 +82,18 @@ export class Game {
     }
 
     getPieces() {
-        const cut = (id: number) => {
-            let clone = [...this.state.map((r) => [...r])];
-
-            const cutTop = () => {
-                while (true) {
-                    for (let j = 0; j < clone[0].length; j++) {
-                        if (clone[0][j] === id) {
-                            return;
-                        }
-                    }
-                    clone = clone.slice(1)
-                }
-
-            }
-
-            cutTop();
-            clone = rotate(clone);
-            cutTop();
-            clone = rotate(clone);
-            cutTop();
-            clone = rotate(clone);
-            cutTop();
-            clone = rotate(clone);
-            return clone
-        }
-
         const clean = (shape: number[][], id: number): (0 | 1)[][] =>
             [...shape.map((row) => row.map((n) => n === id ? 1 : 0))]
 
 
         const colors = shuffle(availableColors)
         for (let i = 1; i <= this.numPieces; i++) {
-            const piece = cut(i);
+            const piece = cut(this.state, (v) => v === i);
             this.pieces.push({
                 id: i,
                 shape: clean(piece, i),
-                color: colors[i - 1] ?? "white"
+                color: colors[i - 1] ?? "white",
+                isUsed: false
             })
         }
 

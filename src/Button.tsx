@@ -21,7 +21,7 @@ export const Button = ({ ...buttonProps }) => (
             cursor: "not-allowed",
             color: "white",
         })
-    })} {...buttonProps}>
+    }, buttonProps.className)} {...buttonProps}>
 
     </button>
 )
