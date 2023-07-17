@@ -19,8 +19,8 @@ export const Piece: React.FC<{ piece: PieceType }> = ({ piece }) => {
             })}>
                 {piece.shape.reduce((i, j, ind) => [...i, ...j.map((k, i) => (
                     <div key={ind + "-" + i} className={css({
-                        width: "10px",
-                        height: "10px",
+                        width: "15px",
+                        height: "15px",
                         background: k === 1 ? piece.color : "unset"
                     })}></div>
                 ))], [] as ReactNode[])}

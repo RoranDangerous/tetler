@@ -55,15 +55,16 @@ export const cut = <T>(arr: T[][], key: (p: T) => boolean): T[][] => {
 }
 
 export const flip = <T>(arr: T[][]): T[][] => {
-    for (let i = 0; i < arr.length; i += 1) {
-        for (let j = 0; j < arr[i].length / 2; j += 1) {
-            const temp = arr[i][j]
-            arr[i][j] = arr[i][arr[i].length - 1 - j];
-            arr[i][arr[i].length - 1 - j] = temp
+    const clone = [...arr.map((row) => [...row])]
+    for (let i = 0; i < clone.length; i += 1) {
+        for (let j = 0; j < clone[i].length / 2; j += 1) {
+            const temp = clone[i][j]
+            clone[i][j] = clone[i][clone[i].length - 1 - j];
+            clone[i][clone[i].length - 1 - j] = temp
         }
     }
 
-    return [...arr]
+    return [...clone]
 }
 
 export const matches = <T>(arr1: T[][], arr2: T[][]): boolean => {
@@ -75,7 +76,6 @@ export const matches = <T>(arr1: T[][], arr2: T[][]): boolean => {
                 }
             }
         }
-        console.log(a1, a2)
         return true
     }
 

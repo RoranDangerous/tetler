@@ -1,10 +1,10 @@
 import { css } from "@emotion/css";
 
-export const useBoardStyles = () => ({
+export const useBoardStyles = ({ size }: { size: number }) => ({
     board: css({
         display: "inline-grid",
         gap: "2px",
-        gridTemplateColumns: "repeat(5, 1fr)",
+        gridTemplateColumns: `repeat(${size}, 1fr)`,
         width: "350px",
         height: "350px"
     }),

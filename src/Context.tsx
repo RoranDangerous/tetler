@@ -4,9 +4,11 @@ import { Cell, Piece } from "./types";
 export const GameContext = createContext<{
     state: Cell[][];
     pieces: Piece[];
+    size: number;
     onCellClick: (i: number, j: number) => void;
 }>({
     state: [],
     onCellClick: () => { },
-    pieces: []
+    pieces: [],
+    size: 0
 })

@@ -1,7 +1,7 @@
 import { css } from "@emotion/css";
 
 export const Button = ({ ...buttonProps }) => (
-    <button className={css({
+    <button {...buttonProps} className={css({
         backgroundColor: "#20b574",
         color: "white",
         padding: "1.2rem",
@@ -9,7 +9,7 @@ export const Button = ({ ...buttonProps }) => (
         border: "none",
         borderRadius: "10px",
         cursor: "pointer",
-        margin: "1.5rem auto 0 auto",
+        margin: "1.5rem auto",
         fontSize: "1rem",
         maxWidth: "90vw",
         "&:hover": css({
@@ -21,7 +21,7 @@ export const Button = ({ ...buttonProps }) => (
             cursor: "not-allowed",
             color: "white",
         })
-    }, buttonProps.className)} {...buttonProps}>
+    }, buttonProps.className)}>
 
     </button>
 )

@@ -7,8 +7,8 @@ type BoardProps = {
 }
 
 export const Board: React.FC<BoardProps> = () => {
-    const styles = useBoardStyles();
-    const { state } = useContext(GameContext);
+    const { state, size } = useContext(GameContext);
+    const styles = useBoardStyles({ size });
 
     return (
         <div className={styles.board}>

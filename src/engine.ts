@@ -4,14 +4,17 @@ import { cut, shuffle } from "./arrayUtils";
 
 export class Game {
     size: number = 5; // board size NxN
-    maxSize: number = 5; // max size of each piece
-    minSize: number = 2; // min size of each piece
+    maxSize: number = 6; // max size of each piece
+    minSize: number = 3; // min size of each piece
     state: number[][]; // winning state
     pieces: Piece[]; // list of game pieces
     numPieces: number = 0;
 
     constructor() {
-        (Math as any).seedrandom("12345");
+        // Set seed to reset puzzle once a day
+        const today = new Date();
+        const seed = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+        (Math as any).seedrandom(seed);
 
         this.state = [...Array(5)].map(() => [...Array(this.size).fill(0)]);
         this.pieces = [];
@@ -19,9 +22,6 @@ export class Game {
         this.generate()
 
         this.getPieces();
-
-        console.log(this.state, this.numPieces)
-        console.log(this.pieces)
     }
 
     generate() {
@@ -56,22 +56,13 @@ export class Game {
             }
             sizes[currentElement] += 1
 
-            // rotate next pick to avoid straight lines
-            if (this.state[i + 1]?.[j] === 0 && pick(currentElement)) {
-                next(i + 1, j, currentElement);
-            }
+            const nextPositions = shuffle([[i + 1, j], [i - 1, j], [i, j + 1], [i, j - 1]]);
 
-            if (this.state[i][j + 1] === 0 && pick(currentElement)) {
-                next(i, j + 1, currentElement);
-            }
-
-            if (this.state[i][j - 1] === 0 && pick(currentElement)) {
-                next(i, j - 1, currentElement);
-            }
-
-            if (this.state[i - 1]?.[j] === 0 && pick(currentElement)) {
-                next(i - 1, j, currentElement);
-            }
+            nextPositions.forEach(([ii, jj]) => {
+                if (this.state[ii]?.[jj] === 0 && pick(currentElement!)) {
+                    next(ii, jj, currentElement)
+                }
+            })
         }
 
         this.state.forEach((row, i) => {

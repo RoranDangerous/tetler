@@ -11,8 +11,7 @@ export const Pieces = () => {
             display: "inline-grid",
             gap: "2px",
             gridAutoFlow: "column",
-            marginBottom: "0.5rem"
-
+            marginBottom: "2rem",
         })}>
             {pieces.map((piece) => (
                 <Piece key={piece.id} piece={piece} />
