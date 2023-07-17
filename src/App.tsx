@@ -75,7 +75,13 @@ export const App = () => {
   }
 
   const shareResults = () => {
-    navigator.clipboard.writeText(`Tetler #1 ✅\n\n${window.location.href}`);
+    const firstPuzzleDate = new Date();
+    firstPuzzleDate.setDate(16)
+    firstPuzzleDate.setMonth(6)
+    firstPuzzleDate.setFullYear(2023)
+    const today = new Date();
+    const number = Math.round((today.getTime() - firstPuzzleDate.getTime()) / (1000 * 3600 * 24))
+    navigator.clipboard.writeText(`Tetler #${number + 1} ✅\n\n${window.location.href}`);
     toast("Copied to clipboard")
   }
 
